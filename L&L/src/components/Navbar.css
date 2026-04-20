@@ -1,0 +1,148 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 50px;
+  background: rgba(10, 10, 30, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #00b4d8;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 800;
+  color: #00e5ff;
+  letter-spacing: 1px;
+  background: rgba(3, 245, 192, 0.15);
+  padding: 5px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* ── Desktop nav links (hidden on mobile) ── */
+.nav-links {
+  display: none;
+  gap: 6px;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.nav-links a.active {
+  background: rgba(0, 180, 216, 0.2);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+/* ── Bottom nav bar (mobile only) ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  height: 58px;
+  background: rgba(10, 10, 30, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 180, 216, 0.5);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.bottom-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: color 0.2s, background 0.2s;
+  padding: 6px 4px;
+}
+
+.bottom-nav a .nav-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.bottom-nav a:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bottom-nav a.active {
+  color: #00e5ff;
+  background: rgba(0, 180, 216, 0.12);
+  border-top: 2px solid #00e5ff;
+}
+
+/* push page content above bottom nav on mobile */
+.page-wrapper {
+  padding-bottom: 68px;
+}
+
+
+/* ── Tablet / Laptop (≥ 640px) — top nav ── */
+@media (min-width: 640px) {
+  .navbar {
+    padding: 0 24px;
+    height: 54px;
+  }
+
+  .brand {
+    font-size: 20px;
+    padding: 6px 14px;
+  }
+
+  /* Show top links, hide bottom nav */
+  .nav-links {
+    display: flex;
+  }
+
+  .bottom-nav {
+    display: none;
+  }
+
+  .page-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+/* ── Desktop (≥ 900px) ── */
+@media (min-width: 900px) {
+  .navbar {
+    padding: 0 40px;
+    height: 56px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+    padding: 8px 18px;
+  }
+}

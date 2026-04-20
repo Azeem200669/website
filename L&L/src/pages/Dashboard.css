@@ -1,0 +1,696 @@
+.dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.dash-title {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.dash-card {
+  border-radius: 16px;
+  padding: 22px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.income-card  { background: linear-gradient(135deg, #ffffff, #e8fdf5); }
+.salary-card  { background: linear-gradient(135deg, #ffffff, #fff8e1); }
+.profit-card  { background: linear-gradient(135deg, #ffffff, #e8f5e9); }
+.loss-card    { background: linear-gradient(135deg, #ffffff, #fce4ec); }
+
+.dash-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.dash-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dash-label {
+  font-size: 13px;
+  color: #777;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dash-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1.2;
+}
+
+.profit-value { color: #2e7d32; }
+.loss-value   { color: #c62828; }
+
+.dash-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.dash-breakdown span {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Summary Table */
+.summary-table {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.summary-table h3 {
+  font-size: 16px;
+  color: #1a1a2e;
+  margin-bottom: 14px;
+}
+
+.summary-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.summary-table th {
+  text-align: left;
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.summary-table td {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.income  { background: #e0f7fa; color: #00838f; }
+.badge.salary  { background: #fff8e1; color: #f57f17; }
+
+.table-amount {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+/* ── paste these rules at the bottom of your Dashboard.css ── */
+
+/* History button in header */
+.dash-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dash-top-row .dash-title {
+  margin-bottom: 0;
+}
+
+.history-btn {
+  padding: 9px 16px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.history-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── History page ── */
+
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.history-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Year chips */
+.history-year-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.year-chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.year-chip.active,
+.year-chip:hover {
+  background: #00b4d8;
+  border-color: #00b4d8;
+}
+
+/* Month chips */
+.history-month-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.month-chip {
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.month-chip.active,
+.month-chip:hover {
+  background: #00b4d8;
+  border-color: #00b4d8;
+}
+
+/* Calendar card */
+.cal-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cal-month-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear-day-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  color: #555;
+  cursor: pointer;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+
+.cal-weekday {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #888;
+  padding: 4px 0;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cal-day:hover:not(.cal-empty) {
+  background: #e0f7fa;
+}
+
+.cal-day.has-data::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00b4d8;
+}
+
+.cal-day.selected-day {
+  background: #00b4d8;
+  color: #fff;
+}
+
+.cal-day.selected-day::after {
+  background: #fff;
+}
+
+.cal-day.cal-empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* History summary chips */
+.hist-summary-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.hist-chip {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.hist-chip span { opacity: 0.88; }
+.hist-chip strong { font-size: 15px; }
+
+.income-chip { background: #0077b6; }
+.salary-chip { background: #6a4c93; }
+.profit-chip { background: #2e7d32; }
+.loss-chip   { background: #c62828; }
+
+/* ── paste these at the bottom of your Dashboard.css ── */
+
+/* ── paste these at the bottom of your Dashboard.css ── */
+
+/* ── Mobile-first fixes ── */
+.dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 14px;
+}
+
+.dash-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.dash-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.history-btn {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.history-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* Cards stack in 1 column on mobile */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dash-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dash-icon { font-size: 26px; }
+
+.dash-label {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.dash-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.dash-breakdown {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* Summary table — scrollable on small screens */
+.summary-table {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.summary-table h3 {
+  font-size: 14px;
+  color: #1a1a2e;
+  margin: 0 0 10px 0;
+}
+
+.summary-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 280px;
+  font-size: 13px;
+}
+
+.summary-table th {
+  text-align: left;
+  padding: 8px 10px;
+  background: #f0fafd;
+  color: #555;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.table-amount {
+  font-weight: 700;
+  color: #00838f;
+}
+
+/* ── History page ── */
+
+.history-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.history-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.history-year-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.year-chip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.year-chip.active,
+.year-chip:hover { background: #00b4d8; border-color: #00b4d8; }
+
+.history-month-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.month-chip {
+  padding: 5px 10px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.month-chip.active,
+.month-chip:hover { background: #00b4d8; border-color: #00b4d8; }
+
+/* Calendar */
+.cal-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.cal-month-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear-day-btn {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  color: #555;
+  cursor: pointer;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.cal-weekday {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  padding: 3px 0;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cal-day:hover:not(.cal-empty) { background: #e0f7fa; }
+
+.cal-day.has-data::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00b4d8;
+}
+
+.cal-day.selected-day { background: #00b4d8; color: #fff; }
+.cal-day.selected-day::after { background: #fff; }
+.cal-day.cal-empty { cursor: default; pointer-events: none; }
+
+/* History summary chips */
+.hist-summary-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.hist-chip {
+  flex: 1 1 80px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+}
+
+.hist-chip strong { font-size: 13px; }
+
+.income-chip { background: #0077b6; }
+.salary-chip { background: #6a4c93; }
+.profit-chip { background: #2e7d32; }
+.loss-chip   { background: #c62828; }
+
+
+/* ── Tablet / Laptop (≥ 600px) ── */
+@media (min-width: 600px) {
+
+  .dashboard { padding: 20px 24px; }
+  .dash-title { font-size: 24px; }
+  .history-btn { font-size: 14px; padding: 9px 16px; }
+
+  .dash-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .dash-card { padding: 18px 16px; }
+  .dash-icon { font-size: 30px; }
+  .dash-value { font-size: 22px; }
+  .dash-label { font-size: 13px; }
+  .dash-breakdown { font-size: 13px; }
+
+  .summary-table { padding: 16px 18px; }
+  .summary-table h3 { font-size: 15px; }
+  .summary-table table { font-size: 14px; }
+  .summary-table th { font-size: 13px; }
+
+  .history-title { font-size: 22px; }
+  .year-chip  { font-size: 14px; padding: 7px 16px; }
+  .month-chip { font-size: 13px; padding: 6px 12px; }
+  .cal-month-label { font-size: 15px; }
+  .cal-weekday { font-size: 12px; }
+  .cal-day { font-size: 13px; }
+
+  .hist-chip { font-size: 13px; padding: 12px 10px; }
+  .hist-chip strong { font-size: 15px; }
+}
+
+
+/* ── Desktop (≥ 900px) ── */
+@media (min-width: 900px) {
+
+  .dashboard { padding: 28px 40px; }
+  .dash-title { font-size: 26px; }
+  .dash-card { padding: 20px 18px; }
+  .dash-value { font-size: 24px; }
+}
+
+/* ── Navbar clearance ── */
+.dashboard {
+  padding-top: 62px;
+}
+
+@media (min-width: 640px) {
+  .dashboard {
+    padding-top: 70px;
+  }
+}

@@ -1,0 +1,35 @@
+/* components/Background.css */
+
+.background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+
+  background: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f")
+    no-repeat center center / cover;
+
+  z-index: -1;
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 30, 60, 0.55) 0%,
+    rgba(0, 100, 140, 0.35) 100%
+  );
+}
+
+/* Slightly darker overlay on small screens for readability */
+@media (max-width: 599px) {
+  .background::after {
+    background: linear-gradient(
+      160deg,
+      rgba(0, 20, 50, 0.65) 0%,
+      rgba(0, 80, 120, 0.45) 100%
+    );
+  }
+}
