@@ -23,7 +23,7 @@ import Dashboard    from "./pages/Dashboard";
 function Home() {
   return (
     <div style={{ textAlign: "center", marginTop: "60px", color: "#fff" }}>
-      <h1>Welcome to L & L</h1>
+      <h1>Welcome to L & L Accounts</h1>
       <p>Use the menu above to manage Worker Salaries and Daily Income.</p>
     </div>
   );
