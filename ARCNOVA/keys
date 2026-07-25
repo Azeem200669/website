@@ -1,0 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBFYf5Ky6K3ax7KGV-bfn5yI389ltgZpGE",
+  authDomain: "chatbot-b579b.firebaseapp.com",
+  projectId: "chatbot-b579b",
+  storageBucket: "chatbot-b579b.firebasestorage.app",
+  messagingSenderId: "122334696109",
+  appId: "1:122334696109:web:aab3500b6b5bae1993ec24",
+  measurementId: "G-QDKZRNNGCZ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

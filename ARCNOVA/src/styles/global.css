@@ -1,0 +1,115 @@
+/* ---------------------------------- */
+/* Base Body Overlay                  */
+/* ---------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* Added a sample gradient background so the opacity is visible */
+  background: linear-gradient(135deg, #4f46e5, #9333ea, #ec4899, #4f46e5);
+  background-size: 400% 400%;
+  /* Required for gradient animation */
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+  /* Keeps it behind all content */
+}
+
+/* ---------------------------------- */
+/* Keyframes                          */
+/* ---------------------------------- */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 50% 100%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  75% {
+    background-position: 50% 0%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------------------------------- */
+/* Animation Utility Classes          */
+/* ---------------------------------- */
+.animate-gradient {
+  background-size: 400% 400%;
+  /* Ensures the gradient has room to move */
+  animation: gradientMove 15s ease infinite;
+  will-change: background-position;
+}
+
+.logo-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  /* 'forwards' keeps the final state */
+  will-change: opacity, transform;
+}
+
+/* ---------------------------------- */
+/* Scrollbar Utilities                */
+/* ---------------------------------- */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, and Opera */
+}
+
+/* ---------------------------------- */
+/* Accessibility (Reduced Motion)     */
+/* ---------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-gradient,
+  .logo-glow,
+  .animate-fade-in,
+  body::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
