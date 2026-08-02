@@ -1,0 +1,44 @@
+project-structure/
+├── server/
+│   ├── routes/
+│   │   └── chatRoutes.js
+│   ├── package.json
+│   └── server.js
+├── src/
+│   ├── assets/
+│   │   ├── logo.png
+│   │   └── ocean-bg.jpg
+│   ├── components/
+│   │   ├── Auth/AuthModal.jsx
+│   │   ├── Chat/ChatInput.jsx, ChatMessage.jsx, ChatWindow.jsx
+│   │   ├── Navbar/Navbar.jsx
+│   │   ├── Profile/ProfileModal.jsx
+│   │   ├── Settings/SettingsModal.jsx
+│   │   └── Sidebar/Sidebar.jsx
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   └── ThemeContext.jsx
+│   ├── firebase/
+│   │   └── firebaseConfig.js
+│   ├── hooks/
+│   │   ├── useChat.js
+│   │   └── useModel.js
+│   ├── layouts/
+│   │   └── MainLayout.jsx
+│   ├── pages/
+│   │   ├── Account.jsx
+│   │   └── Home.jsx
+│   ├── services/
+│   │   ├── llm/index.js
+│   │   └── api.js
+│   ├── styles/
+│   │   ├── global.css
+│   │   └── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+│   └── routes.jsx
+├── .env, .gitignore, eslint.config.js, index.html, keys, flow1
+├── package.json, package-lock.json
+├── postcss.config.js, tailwind.config.js
+└── README.md
