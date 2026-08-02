@@ -1,0 +1,545 @@
+/* ========================================= */
+/* USER MANAGEMENT DASHBOARD - RESPONSIVE     */
+/* ========================================= */
+
+.user-management {
+    padding: 32px;
+    color: white;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ─── Header ─────────────────────────────── */
+.um-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.um-header-text h1 {
+    font-size: 28px;
+    margin: 0 0 4px 0;
+}
+
+.um-header-text p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ─── Search ─────────────────────────────── */
+.um-search-wrapper {
+    position: relative;
+    width: 300px;
+}
+
+.um-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    pointer-events: none;
+}
+
+.um-search {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.um-search:focus {
+    border-color: #3b82f6;
+}
+
+.um-search::placeholder {
+    color: #4b5563;
+}
+
+/* ─── Table Container ────────────────────── */
+.um-table-container {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.um-loading,
+.um-empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: #64748b;
+}
+
+/* ─── Table ──────────────────────────────── */
+.um-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.um-table th {
+    text-align: left;
+    padding: 16px 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+}
+
+.um-table td {
+    padding: 16px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+}
+
+.um-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.um-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.um-row-banned {
+    opacity: 0.6;
+}
+
+/* ─── User Info Cell ─────────────────────── */
+.um-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.um-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #334155;
+    flex-shrink: 0;
+}
+
+.um-user-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.um-name {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.um-orbit-id {
+    font-size: 12px;
+    color: #64748b;
+    font-family: monospace;
+}
+
+.um-owner-badge {
+    font-size: 9px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.um-email {
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ─── Role Select ────────────────────────── */
+.um-role-select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    min-width: 100px;
+}
+
+.um-role-select:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.um-role-select option {
+    background: #1e293b;
+    color: white;
+}
+
+/* ─── Status Badge ───────────────────────── */
+.um-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.um-status-active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.um-status-banned {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+/* ─── Action Buttons ─────────────────────── */
+.um-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.um-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.um-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.um-btn-ban {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.um-btn-ban:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.25);
+}
+
+.um-btn-unban {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.um-btn-unban:hover:not(:disabled) {
+    background: rgba(34, 197, 94, 0.25);
+}
+
+.um-btn-delete {
+    background: transparent;
+    color: #64748b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.um-btn-delete:hover:not(:disabled) {
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Inline Delete Confirmation */
+.um-confirm-delete {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #f87171;
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.um-btn-yes {
+    background: #ef4444;
+    color: white;
+}
+
+.um-btn-no {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.um-protected {
+    font-size: 12px;
+    color: #475569;
+    font-style: italic;
+}
+
+/* ─── Mobile Card Layout ─────────────────── */
+.um-mobile-list {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.um-mobile-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.um-mobile-card.banned {
+    opacity: 0.6;
+}
+
+.um-mobile-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.um-mobile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #334155;
+    flex-shrink: 0;
+}
+
+.um-mobile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.um-mobile-name {
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.um-mobile-orbit-id {
+    font-size: 11px;
+    color: #64748b;
+    font-family: monospace;
+}
+
+.um-mobile-email {
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.um-mobile-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.um-mobile-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.um-mobile-meta-label {
+    font-size: 10px;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.um-mobile-meta-value {
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.um-mobile-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.um-mobile-actions .um-btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+/* ════════════════════════════════════════════ */
+/* RESPONSIVE BREAKPOINTS                     */
+/* ════════════════════════════════════════════ */
+
+/* ─── Tablet (768px - 1024px) ────────────── */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .user-management {
+        padding: 24px;
+    }
+
+    .um-header-text h1 {
+        font-size: 24px;
+    }
+
+    .um-search-wrapper {
+        width: 260px;
+    }
+
+    .um-table th,
+    .um-table td {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .um-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .um-role-select {
+        min-width: 90px;
+        font-size: 12px;
+    }
+
+    .um-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+/* ─── Small Tablet / Large Phone (≤768px) ─── */
+@media (max-width: 768px) {
+    .user-management {
+        padding: 16px;
+    }
+
+    .um-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .um-search-wrapper {
+        width: 100%;
+    }
+
+    .um-header-text h1 {
+        font-size: 22px;
+    }
+
+    /* Hide table, show mobile cards */
+    .um-table-container {
+        display: none;
+    }
+
+    .um-mobile-list {
+        display: flex;
+    }
+}
+
+/* ─── Mobile (≤480px) ────────────────────── */
+@media (max-width: 480px) {
+    .user-management {
+        padding: 12px;
+    }
+
+    .um-header-text h1 {
+        font-size: 20px;
+    }
+
+    .um-header-text p {
+        font-size: 13px;
+    }
+
+    .um-search {
+        padding: 10px 14px 10px 38px;
+        font-size: 13px;
+    }
+
+    .um-mobile-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .um-mobile-top {
+        margin-bottom: 10px;
+    }
+
+    .um-mobile-avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .um-mobile-name {
+        font-size: 14px;
+    }
+
+    .um-mobile-email {
+        font-size: 12px;
+    }
+
+    .um-mobile-meta {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .um-mobile-meta-label {
+        font-size: 9px;
+    }
+
+    .um-mobile-meta-value {
+        font-size: 12px;
+    }
+
+    .um-mobile-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .um-mobile-actions .um-btn {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .um-confirm-delete {
+        font-size: 12px;
+    }
+}

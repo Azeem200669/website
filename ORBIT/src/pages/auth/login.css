@@ -1,0 +1,951 @@
+/* ========================================= */
+/* THE AURORA PORTAL: LOGIN UI — REVISED     */
+/* ========================================= */
+
+:root {
+  --bg-deep: #020617;
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-bg-focus: rgba(255, 255, 255, 0.07);
+  --input-bg-hover: rgba(255, 255, 255, 0.055);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --input-border-bottom: rgba(255, 255, 255, 0.15);
+  --text-primary: #ffffff;
+  --text-muted: #64748b;
+  --text-placeholder: #4b5563;
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --link-blue: #60a5fa;
+  --error-red: #f87171;
+  --error-amber: #fbbf24;
+  --error-amber-bg: rgba(15, 23, 42, 0.6);
+  --error-amber-border: rgba(245, 158, 11, 0.2);
+  --error-banned-bg: rgba(239, 68, 68, 0.1);
+  --error-banned-border: rgba(239, 68, 68, 0.25);
+  --error-banned-text: #fca5a5;
+  --divider-line: rgba(255, 255, 255, 0.08);
+  --card-radius: 24px;
+  --input-radius: 12px;
+  --btn-radius: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Animated Aurora Background ──────────── */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-deep);
+  padding: 20px;
+}
+
+.login-page::before,
+.login-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login-page::before {
+  width: 130%;
+  height: 130%;
+  top: -40%;
+  left: -15%;
+  border: 1px solid transparent;
+  border-top-color: rgba(59, 130, 246, 0.15);
+  border-bottom-color: rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.05);
+  transform: rotateX(70deg) rotateY(10deg) rotateZ(45deg);
+  animation: bgOrbitSpin1 90s linear infinite;
+}
+
+.login-page::after {
+  width: 140%;
+  height: 140%;
+  bottom: -50%;
+  right: -20%;
+  border: 1px solid transparent;
+  border-left-color: rgba(6, 182, 212, 0.1);
+  border-right-color: rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.05);
+  transform: rotateX(75deg) rotateY(-15deg) rotateZ(-30deg);
+  animation: bgOrbitSpin2 110s linear infinite reverse;
+}
+
+@keyframes bgOrbitSpin1 {
+  from {
+    transform: rotateX(70deg) rotateY(10deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(70deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+@keyframes bgOrbitSpin2 {
+  from {
+    transform: rotateX(75deg) rotateY(-15deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(75deg) rotateY(-15deg) rotateZ(360deg);
+  }
+}
+
+/* ─── Floating Aurora Orbs ────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  transition: transform 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.orb1 {
+  width: 450px;
+  height: 450px;
+  background: #2563eb;
+  top: -150px;
+  left: -100px;
+  animation: floatOrb1 12s ease-in-out infinite alternate;
+}
+
+.orb2 {
+  width: 500px;
+  height: 500px;
+  background: #8b5cf6;
+  bottom: -150px;
+  right: -150px;
+  animation: floatOrb2 14s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(80px, 60px) scale(1.1);
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(-60px, -80px) scale(1.15);
+  }
+}
+
+/* ─── Giant Looming Planet Background ─────── */
+.planet {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  bottom: -250px;
+  left: -150px;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0%, transparent 8%,
+      rgba(255, 255, 255, 0.03) 8%, rgba(255, 255, 255, 0.03) 9%,
+      transparent 9%, transparent 15%,
+      rgba(255, 255, 255, 0.05) 15%, rgba(255, 255, 255, 0.05) 16%),
+    linear-gradient(135deg, #1e3a8a 0%, #4c1d95 40%, #1e1b4b 100%);
+  box-shadow:
+    inset -60px -40px 100px rgba(0, 0, 0, 0.8),
+    inset 20px 20px 60px rgba(59, 130, 246, 0.2),
+    0 0 80px rgba(30, 58, 138, 0.4);
+  animation: planetFloat 20s ease-in-out infinite alternate;
+}
+
+.planet::after {
+  content: '';
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 180%;
+  height: 30px;
+  border: 3px solid rgba(139, 92, 246, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotateX(75deg) rotateZ(-20deg);
+  box-shadow:
+    0 0 15px rgba(124, 58, 237, 0.2),
+    inset 0 0 10px rgba(124, 58, 237, 0.2);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes planetFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(20px, -15px) scale(1.02);
+  }
+}
+
+/* ─── Glass Card with Rotating Border ─────── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+  position: relative;
+  text-align: center;
+  color: var(--text-primary);
+  z-index: 20;
+  background: var(--card-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: var(--card-radius);
+  animation: cardEntry 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--card-radius) + 1px);
+  padding: 1px;
+  background: conic-gradient(from var(--angle), transparent 40%, #3b82f6 50%, #8b5cf6 60%, transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateBorder 4s linear infinite;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .login-card::before {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4));
+    animation: none;
+  }
+}
+
+.login-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotateBorder {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes cardEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── 3D Atomic Orbit Logo ────────────────── */
+.logo-container {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+.logo-core {
+  font-size: 46px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  background-size: 300% 300%;
+  animation: gradientShift 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 10;
+  filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.6));
+  transform: translateZ(20px);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.orbital-ring {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  border-top-color: #3b82f6;
+  border-bottom-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), inset 0 0 15px rgba(139, 92, 246, 0.2);
+  animation: spinOrbit1 3s linear infinite;
+  pointer-events: none;
+}
+
+.ring-2 {
+  top: -25px;
+  left: -25px;
+  right: -25px;
+  bottom: -25px;
+  border-color: rgba(6, 182, 212, 0.1);
+  border-left-color: #06b6d4;
+  border-right-color: #8b5cf6;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2), inset 0 0 20px rgba(139, 92, 246, 0.1);
+  animation: spinOrbit2 5s linear infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes spinOrbit1 {
+  from {
+    transform: rotateX(60deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(60deg) rotateZ(360deg);
+  }
+}
+
+@keyframes spinOrbit2 {
+  from {
+    transform: rotateX(75deg) rotateY(40deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(75deg) rotateY(40deg) rotateZ(360deg);
+  }
+}
+
+/* ─── Typography & Subtitles ──────────────── */
+.login-card h1 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  min-height: 24px;
+  font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.subtitle.subtitle-error {
+  color: var(--error-red);
+}
+
+.cursor {
+  color: var(--accent-blue);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ─── Google Button ───────────────────────── */
+.google-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: var(--btn-radius);
+  background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.google-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
+}
+
+.google-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+.google-btn:hover::after {
+  animation: shimmer 0.7s ease-in-out;
+}
+
+.google-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* ─── Divider ─────────────────────────────── */
+.divider {
+  margin: 28px 0;
+  display: flex;
+  align-items: center;
+  color: #4b5563;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--divider-line);
+}
+
+.divider span {
+  padding: 0 16px;
+}
+
+/* ─── Form Container ──────────────────────── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ─── Email Input Wrapper (matches password wrapper style) ── */
+.email-wrapper {
+  position: relative;
+  margin-top: 15px;
+}
+
+.email-wrapper input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border-radius: var(--input-radius);
+  border: 1px solid var(--input-border);
+  border-bottom: 2px solid var(--input-border-bottom);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.email-wrapper input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.email-wrapper input:hover {
+  background: var(--input-bg-hover);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.email-wrapper input:focus {
+  background: var(--input-bg-focus);
+  border-color: transparent;
+  border-bottom-color: var(--accent-blue);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.email-wrapper input.input-error {
+  border-bottom-color: var(--error-red);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.1);
+}
+
+/* Left icon inside email field */
+.email-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-placeholder);
+  pointer-events: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.email-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.email-wrapper input:focus~.email-icon {
+  color: var(--accent-blue);
+}
+
+.email-wrapper input.input-error~.email-icon {
+  color: var(--error-red);
+}
+
+/* ─── Password Input Wrapper ──────────────── */
+.input-wrapper {
+  position: relative;
+  margin-top: 15px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 16px 50px 16px 48px;
+  border-radius: var(--input-radius);
+  border: 1px solid var(--input-border);
+  border-bottom: 2px solid var(--input-border-bottom);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.input-wrapper input:hover {
+  background: var(--input-bg-hover);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.input-wrapper input:focus {
+  background: var(--input-bg-focus);
+  border-color: transparent;
+  border-bottom-color: var(--accent-blue);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.input-wrapper input.input-error {
+  border-bottom-color: var(--error-red);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.1);
+}
+
+/* Left icon inside password field */
+.pass-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-placeholder);
+  pointer-events: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.pass-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.input-wrapper input:focus~.pass-icon {
+  color: var(--accent-blue);
+}
+
+.input-wrapper input.input-error~.pass-icon {
+  color: var(--error-red);
+}
+
+/* Right eye toggle */
+.eye-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.eye-toggle:hover {
+  color: #94a3b8;
+}
+
+.eye-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* ─── Login Button ────────────────────────── */
+.email-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px;
+  border: none;
+  border-radius: var(--btn-radius);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--bg-deep);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+}
+
+.email-btn:hover {
+  transform: translateY(-2px);
+  background: white;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.email-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.email-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.email-btn.loading .btn-text {
+  visibility: hidden;
+}
+
+.email-btn .spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(2, 6, 23, 0.2);
+  border-top-color: var(--bg-deep);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.email-btn.loading .spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ─── Text Links ──────────────────────────── */
+.link-btn {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  color: var(--link-blue);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+  display: inline-block;
+}
+
+.link-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--link-blue);
+  transition: width 0.2s ease;
+}
+
+.link-btn:hover {
+  color: white;
+}
+
+.link-btn:hover::after {
+  width: 100%;
+}
+
+/* ─── Error Banner ────────────────────────── */
+.error-banner {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 4px;
+  animation: shake 0.4s ease-in-out;
+  text-align: left;
+}
+
+.error-banner.visible {
+  display: flex;
+}
+
+.error-banner p {
+  margin: 0;
+  font-size: 14px;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.error-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.error-banner:not(.banned-banner) {
+  background: var(--error-amber-bg);
+  border: 1px solid var(--error-amber-border);
+}
+
+.error-banner:not(.banned-banner) .error-icon {
+  color: var(--error-amber);
+}
+
+.error-banner:not(.banned-banner) p {
+  color: var(--error-amber);
+}
+
+.error-banner.banned-banner {
+  background: var(--error-banned-bg);
+  border: 1px solid var(--error-banned-border);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
+}
+
+.error-banner.banned-banner .error-icon {
+  color: var(--error-banned-text);
+}
+
+.error-banner.banned-banner p {
+  color: var(--error-banned-text);
+  font-weight: 500;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-6px);
+  }
+
+  50% {
+    transform: translateX(6px);
+  }
+
+  75% {
+    transform: translateX(-6px);
+  }
+}
+
+/* ─── Disabled States ─────────────────────── */
+button:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ─── Toast Notification ──────────────────── */
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120%);
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.toast-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.toast.toast-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* ─── Mobile Responsive ───────────────────── */
+@media (max-width: 768px) {
+  .login-page {
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 24px;
+  }
+
+  .login-card h1 {
+    font-size: 36px;
+  }
+
+  .email-wrapper input,
+  .input-wrapper input {
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .email-wrapper input {
+    padding-left: 44px;
+  }
+
+  .input-wrapper input {
+    padding-left: 44px;
+    padding-right: 46px;
+  }
+
+  .planet {
+    display: none;
+  }
+
+  .orb {
+    opacity: 0.25;
+  }
+
+  .logo-container {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+  }
+
+  .logo-core {
+    font-size: 36px;
+  }
+
+  .orbital-ring {
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+  }
+
+  .ring-2 {
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+  }
+}
+
+/* ─── Reduced Motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Focus Visible ───────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+input:focus-visible {
+  outline: none;
+}

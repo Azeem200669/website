@@ -1,0 +1,649 @@
+/* ========================================= */
+/* REPORTS MANAGEMENT (Dark Theme)           */
+/* ========================================= */
+
+.reports-page {
+    color: #e2e8f0;
+}
+
+/* ─── Loading ─────────────────────────────── */
+.rm-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    gap: 16px;
+    color: #64748b;
+}
+
+.rm-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Toasts ──────────────────────────────── */
+.rm-toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: calc(100vw - 32px);
+}
+
+.rm-toast {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 360px;
+}
+
+.rm-toast.success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.rm-toast.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+.rm-toast.info {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ─── Header ──────────────────────────────── */
+.rm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.rm-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rm-header-left h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.rm-badge {
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+}
+
+.rm-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rm-search {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    width: 280px;
+    transition: border-color 0.2s;
+}
+
+.rm-search:focus {
+    border-color: #3b82f6;
+}
+
+.rm-search::placeholder {
+    color: #475569;
+}
+
+.rm-select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.8);
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* ─── Stats Grid ──────────────────────────── */
+.rm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.rm-stat-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.rm-stat-card.pending {
+    border-left: 4px solid #f59e0b;
+}
+
+.rm-stat-card.resolved {
+    border-left: 4px solid #22c55e;
+}
+
+.rm-stat-card.dismissed {
+    border-left: 4px solid #64748b;
+}
+
+.rm-stat-icon {
+    font-size: 2rem;
+}
+
+.rm-stat-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.rm-stat-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ─── Empty State ─────────────────────────── */
+.rm-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 16px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.rm-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.rm-empty h3 {
+    color: #94a3b8;
+    margin: 0 0 8px 0;
+}
+
+.rm-empty p {
+    color: #475569;
+    margin: 0;
+}
+
+/* ─── Reports List ────────────────────────── */
+.rm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rm-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s;
+}
+
+.rm-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.rm-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 16px;
+}
+
+.rm-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.rm-card-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.rm-type-badge {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.rm-status-pill {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.rm-status-pill.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+.rm-status-pill.resolved {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.rm-status-pill.dismissed {
+    background: rgba(100, 116, 139, 0.15);
+    color: #94a3b8;
+}
+
+/* ─── Meta Grid ───────────────────────────── */
+.rm-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rm-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.rm-label {
+    font-size: 0.75rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rm-value {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    word-break: break-word;
+}
+
+.mono {
+    font-family: monospace;
+    font-size: 0.8rem !important;
+    color: #94a3b8 !important;
+    word-break: break-all;
+}
+
+/* ─── Description ─────────────────────────── */
+.rm-description {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 16px;
+    font-style: italic;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    border-left: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Actions ─────────────────────────────── */
+.rm-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.rm-actions-left,
+.rm-actions-right {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.rm-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.rm-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.rm-btn.ban {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.rm-btn.ban:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.rm-btn.unban {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+.rm-btn.unban:hover:not(:disabled) {
+    background: rgba(34, 197, 94, 0.2);
+}
+
+.rm-btn.resolve {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.rm-btn.resolve:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.rm-btn.dismiss {
+    background: transparent;
+    color: #94a3b8;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.rm-btn.dismiss:hover:not(:disabled) {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.rm-btn.delete {
+    background: transparent;
+    color: #475569;
+    padding: 8px 12px;
+}
+
+.rm-btn.delete:hover:not(:disabled) {
+    color: #f87171;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* ════════════════════════════════════════════ */
+/* RESPONSIVE BREAKPOINTS                     */
+/* ════════════════════════════════════════════ */
+
+/* ─── Tablet (768px - 1024px) ────────────── */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .rm-header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .rm-search {
+        width: 220px;
+    }
+
+    .rm-stat-card {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .rm-stat-icon {
+        font-size: 1.6rem;
+    }
+
+    .rm-stat-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .rm-card {
+        padding: 20px;
+    }
+}
+
+/* ─── Small Tablet / Large Phone (≤768px) ─── */
+@media (max-width: 768px) {
+    .rm-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rm-header-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rm-header-left h1 {
+        font-size: 1.4rem;
+    }
+
+    .rm-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .rm-search {
+        flex: 1;
+        width: 100%;
+    }
+
+    .rm-select {
+        width: 100%;
+    }
+
+    .rm-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .rm-stat-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px 12px;
+        gap: 8px;
+    }
+
+    .rm-stat-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .rm-card {
+        padding: 16px;
+    }
+
+    .rm-card-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rm-card-title {
+        flex-wrap: wrap;
+    }
+
+    .rm-meta {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .rm-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rm-actions-left,
+    .rm-actions-right {
+        justify-content: stretch;
+    }
+
+    .rm-actions-left .rm-btn,
+    .rm-actions-right .rm-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* ─── Mobile (≤480px) ────────────────────── */
+@media (max-width: 480px) {
+    .rm-header-left h1 {
+        font-size: 1.2rem;
+    }
+
+    .rm-badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+
+    .rm-stats-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+    }
+
+    .rm-stat-card {
+        padding: 12px 8px;
+        gap: 6px;
+    }
+
+    .rm-stat-icon {
+        font-size: 1.4rem;
+    }
+
+    .rm-stat-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .rm-stat-card p {
+        font-size: 0.7rem;
+    }
+
+    .rm-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .rm-card-title h3 {
+        font-size: 0.95rem;
+    }
+
+    .rm-type-badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+
+    .rm-status-pill {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+    }
+
+    .rm-description {
+        padding: 12px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+    }
+
+    .rm-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .rm-toast {
+        font-size: 13px;
+        padding: 10px 16px;
+        max-width: 300px;
+    }
+
+    .rm-toast-container {
+        right: 12px;
+        top: 12px;
+        left: 12px;
+        max-width: none;
+    }
+}
+
+/* ─── Safe Area Insets ───────────────────── */
+@supports (padding: env(safe-area-inset-top)) {
+    .rm-toast-container {
+        top: calc(24px + env(safe-area-inset-top));
+        right: calc(24px + env(safe-area-inset-right));
+    }
+}
+
+/* ─── Reduced Motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .rm-spinner {
+        animation-duration: 0.01ms !important;
+    }
+
+    .rm-toast {
+        animation-duration: 0.01ms !important;
+    }
+}

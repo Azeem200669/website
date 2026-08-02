@@ -1,0 +1,234 @@
+/* ========================================= */
+/* OWNER LAYOUT - RESPONSIVE                 */
+/* ========================================= */
+
+:root {
+    --sidebar-width: 260px;
+    --content-padding: 24px;
+}
+
+.owner-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #030712;
+}
+
+.owner-sidebar {
+    width: var(--sidebar-width);
+    background: #111827;
+    border-right: 1px solid #1f2937;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+
+.owner-logo {
+    margin-bottom: 30px;
+}
+
+.owner-logo h2 {
+    color: white;
+    margin: 0;
+}
+
+.owner-logo span {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.owner-sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.owner-sidebar a {
+    text-decoration: none;
+    color: #d1d5db;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.owner-sidebar a:hover {
+    background: #1f2937;
+}
+
+.owner-sidebar a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.owner-content {
+    flex: 1;
+    padding: var(--content-padding);
+    overflow-y: auto;
+    min-width: 0;
+}
+
+/* ─── Mobile Menu Toggle ──────────────────── */
+.owner-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.owner-menu-toggle:hover {
+    background: #334155;
+}
+
+/* ─── Mobile Overlay ──────────────────────── */
+.owner-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.owner-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ─── Laptop/Desktop (>1024px) ────────────── */
+@media (min-width: 1025px) {
+
+    .owner-menu-toggle,
+    .owner-overlay {
+        display: none !important;
+    }
+}
+
+/* ─── Tablet (768px - 1024px) ────────────── */
+@media (max-width: 1024px) and (min-width: 769px) {
+    :root {
+        --sidebar-width: 220px;
+        --content-padding: 20px;
+    }
+
+    .owner-sidebar {
+        padding: 16px;
+    }
+
+    .owner-logo {
+        margin-bottom: 24px;
+    }
+
+    .owner-logo h2 {
+        font-size: 1.2rem;
+    }
+
+    .owner-sidebar a {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ─── Small Tablet / Large Phone (≤768px) ─── */
+@media (max-width: 768px) {
+    .owner-menu-toggle {
+        display: flex;
+    }
+
+    .owner-overlay {
+        display: block;
+        pointer-events: none;
+    }
+
+    .owner-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        box-shadow: none;
+        width: 280px;
+        padding: 24px;
+    }
+
+    .owner-sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .owner-content {
+        padding: 16px;
+        padding-top: 72px;
+        width: 100%;
+    }
+
+    .owner-logo {
+        margin-bottom: 24px;
+        padding-right: 40px;
+    }
+}
+
+/* ─── Mobile (≤480px) ────────────────────── */
+@media (max-width: 480px) {
+    .owner-sidebar {
+        width: 260px;
+        padding: 20px;
+    }
+
+    .owner-content {
+        padding: 12px;
+        padding-top: 68px;
+    }
+
+    .owner-logo h2 {
+        font-size: 1.1rem;
+    }
+
+    .owner-sidebar a {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ─── Safe Area Insets (Notched Devices) ──── */
+@supports (padding: env(safe-area-inset-top)) {
+    .owner-menu-toggle {
+        top: calc(16px + env(safe-area-inset-top));
+        left: calc(16px + env(safe-area-inset-left));
+    }
+
+    .owner-content {
+        padding-top: calc(72px + env(safe-area-inset-top));
+    }
+}
+
+/* ─── Reduced Motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+    .owner-sidebar,
+    .owner-overlay {
+        transition-duration: 0.01ms !important;
+    }
+}

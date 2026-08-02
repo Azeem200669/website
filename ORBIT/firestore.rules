@@ -1,0 +1,275 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "owner";
+    }
+
+    // ───────── USERS ─────────
+    match /users/{userId} {
+
+      allow read: if signedIn();
+
+      allow create: if signedIn() &&
+        request.auth.uid == userId;
+
+      allow update: if signedIn() &&
+        (
+          request.auth.uid == userId ||
+          isOwner()
+        );
+
+      allow delete: if signedIn() &&
+        (
+          request.auth.uid == userId ||
+          isOwner()
+        );
+
+      // User Notifications
+      match /notifications/{notifId} {
+
+        allow read: if signedIn() &&
+          (
+            request.auth.uid == userId ||
+            isOwner()
+          );
+
+        allow update: if signedIn() &&
+          request.auth.uid == userId;
+
+        allow create, delete: if isOwner();
+      }
+      
+      // ─── User Private Data ───
+      match /privateData/{docId} {
+
+        allow read: if signedIn() &&
+          request.auth.uid == userId;
+
+        allow create: if signedIn() &&
+          request.auth.uid == userId;
+
+        allow update: if signedIn() &&
+          request.auth.uid == userId;
+
+        allow delete: if false;
+      }
+      
+      // User Reward History
+      match /rewardHistory/{historyId} {
+
+        allow read: if signedIn() &&
+          (
+            request.auth.uid == userId ||
+            isOwner()
+          );
+
+        allow create: if isOwner();
+
+        allow update, delete: if false;
+      }
+    }
+
+    // ───────── USER SETTINGS ─────────
+    match /userSettings/{userId} {
+      allow read, write: if signedIn() &&
+        request.auth.uid == userId;
+    }
+
+    // ───────── FRIEND REQUESTS ─────────
+    match /friend_requests/{requestId} {
+
+      allow read: if signedIn();
+
+      allow create: if signedIn() &&
+        request.resource.data.from == request.auth.uid;
+
+      allow update, delete: if signedIn();
+    }
+
+    // ───────── DIAMOND TRANSACTIONS ─────────
+    match /diamondTransactions/{transactionId} {
+
+      allow read: if signedIn() &&
+        (
+          resource.data.senderId == request.auth.uid ||
+          resource.data.receiverId == request.auth.uid ||
+          isOwner()
+        );
+
+      allow create, update: if false;
+      
+      allow delete: if isOwner();
+    }
+
+    // ───────── COMMUNITIES ─────────
+    match /communities/{communityId} {
+
+      allow read: if signedIn();
+
+      allow create: if signedIn();
+
+      allow update: if signedIn();
+
+      allow delete: if signedIn() &&
+        (
+          isOwner() ||
+          request.auth.uid == resource.data.createdBy
+        );
+    }
+
+    // ───────── REPORTS ─────────
+    match /reports/{reportId} {
+
+      allow read: if isOwner();
+
+      allow create: if signedIn();
+
+      allow update, delete: if isOwner();
+    }
+
+    // ───────── REWARDS ─────────
+    match /rewards/{rewardId} {
+
+      allow read: if signedIn();
+
+      allow create, update, delete: if isOwner();
+    }
+
+    // ───────── BADGES ─────────
+    match /badges/{badgeId} {
+
+      allow read: if signedIn();
+
+      allow create, update, delete: if isOwner();
+    }
+
+    // ───────── REWARD CLAIMS ─────────
+    match /rewardClaims/{claimId} {
+
+      allow read: if signedIn() &&
+        (
+          request.auth.uid == resource.data.userId ||
+          isOwner()
+        );
+
+      allow create: if signedIn() &&
+        request.resource.data.userId == request.auth.uid;
+
+      allow update, delete: if isOwner();
+    }
+
+    // ───────── OWNER REWARD LOG ─────────
+    match /rewardHistory/{docId} {
+
+      allow read: if isOwner();
+
+      allow create: if isOwner();
+
+      allow update, delete: if false;
+    }
+
+    // ───────── OWNER NOTIFICATION LOG ─────────
+    match /notifications/{notifId} {
+
+      allow read, create, update, delete: if isOwner();
+    }
+
+    // ───────── SPACES ─────────
+    match /spaces/{spaceId} {
+
+      allow read: if signedIn();
+
+      allow create: if signedIn();
+
+      allow update: if signedIn();
+
+      allow delete: if signedIn() &&
+        (
+          isOwner() ||
+          request.auth.uid == resource.data.createdBy
+        );
+
+      match /channels/{channelId} {
+
+        allow read, write: if signedIn();
+      }
+
+      match /messages/{messageId} {
+
+        allow read: if signedIn();
+
+        allow create: if signedIn() &&
+          request.resource.data.senderId == request.auth.uid;
+
+        allow update, delete: if signedIn() &&
+          request.auth.uid == resource.data.senderId;
+      }
+    }
+
+    // ───────── EVENTS ─────────
+    match /events/{eventId} {
+
+      allow read: if signedIn();
+
+      allow create: if signedIn() &&
+        request.resource.data.createdBy == request.auth.uid;
+
+      allow update: if signedIn();
+
+      allow delete: if signedIn() &&
+        (
+          isOwner() ||
+          request.auth.uid == resource.data.createdBy
+        );
+
+      match /messages/{messageId} {
+
+        allow read: if signedIn();
+
+        allow create: if signedIn() &&
+          request.resource.data.senderId == request.auth.uid;
+
+        allow update, delete: if signedIn() &&
+          request.auth.uid == resource.data.senderId;
+      }
+    }
+
+    // ───────── DIRECT CHATS ─────────
+    match /chats/{chatId} {
+
+      allow read, create, update, delete: if signedIn();
+
+      match /messages/{messageId} {
+
+        allow read: if signedIn();
+
+        allow create: if signedIn() &&
+          request.resource.data.senderId == request.auth.uid;
+
+        allow update: if signedIn() &&
+          request.auth.uid == resource.data.senderId;
+
+        // ✅ FIXED: Allow delete for chat members
+        allow delete: if signedIn() &&
+          (
+            request.auth.uid == resource.data.senderId ||
+            request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.members
+          );
+      }
+    }
+
+    // ───────── FALLBACK ─────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+/* ========================================= */
+/* DASHBOARD LAYOUT — Orbit App              */
+/* Owns the page shell: .dashboard / .content */
+/* Sidebar itself is styled in Sidebar.css    */
+/* ========================================= */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: #08090d;
+}
+
+/* ─── Main Content Area ────────────────────────────── */
+.content {
+    flex: 1;
+    min-width: 0;
+    /* prevents flex children from overflowing on mobile */
+    min-height: 100vh;
+    margin-left: 0;
+    /* default: no sidebar offset */
+    overflow-y: auto;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Only push content right while the sidebar actually has .open —
+   sibling selector reads the live state from Sidebar.jsx's isOpen. */
+.sidebar.open~.content {
+    margin-left: 230px;
+    /* offset for the fixed sidebar (Sidebar.css) */
+}
+
+/* ─── Tablet ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .sidebar.open~.content {
+        margin-left: 200px;
+        /* matches Sidebar.css's tablet sidebar width */
+    }
+}
+
+/* ─── Mobile ────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    /* Sidebar overlays content on mobile instead of pushing it, even
+     when open, so content never gets squeezed on a small screen. */
+    .sidebar.open~.content {
+        margin-left: 0;
+    }
+
+    .content {
+        width: 100%;
+        padding-top: 64px;
+        /* clears the fixed hamburger toggle button */
+    }
+}

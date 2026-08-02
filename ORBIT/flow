@@ -1,0 +1,99 @@
+orbit/
+│
+├── public/
+│   ├── icons/
+│   ├── stickers/
+│   └── qr/
+│
+├── src/
+│
+│   ├── app/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── routes.jsx
+│
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── avatars/
+│   │   └── community-banners/
+│
+│   ├── pages/
+│   │
+│   │   ├── auth/
+│   │   ├── home/
+│   │   ├── chats/
+│   │   ├── search/
+│   │   ├── profile/
+│   │   ├── communities/
+│   │   ├── events/
+│   │   ├── notifications/
+│   │   └── settings/
+│
+│   ├── owner/
+│   │   ├── Dashboard.jsx
+│   │   ├── Analytics.jsx
+│   │   ├── UserManagement.jsx
+│   │   ├── ReportsManagement.jsx
+│   │   ├── RewardsManagement.jsx
+│   │   ├── CommunityManagement.jsx
+│   │   ├── EventManagement.jsx
+│   │   ├── NotificationManagement.jsx
+│   │   └── RoleManagement.jsx
+│
+│   ├── admin/
+│   │   ├── Dashboard.jsx
+│   │   ├── Reports.jsx
+│   │   ├── Users.jsx
+│   │   └── Communities.jsx
+│
+│   ├── moderator/
+│   │   ├── Dashboard.jsx
+│   │   ├── ReportsReview.jsx
+│   │   └── Moderation.jsx
+│
+│   ├── components/
+│   │   ├── common/
+│   │   ├── chat/
+│   │   ├── community/
+│   │   ├── event/
+│   │   ├── rewards/
+│   │   └── qr/
+│   │       ├── UserQR.jsx
+│   │       ├── CommunityQR.jsx
+│   │       └── EventQR.jsx
+│
+│   ├── services/
+│   │   ├── authService.js
+│   │   ├── userService.js
+│   │   ├── chatService.js
+│   │   ├── communityService.js
+│   │   ├── eventService.js
+│   │   ├── rewardService.js
+│   │   ├── reportService.js
+│   │   ├── notificationService.js
+│   │   └── qrService.js
+│
+│   ├── contexts/
+│   │   ├── AuthContext.jsx
+│   │   ├── UserContext.jsx
+│   │   └── CommunityContext.jsx
+│
+│   ├── firebase/
+│   │   ├── firebase.js
+│   │  ├── auth.js
+│   │  ├── firestore.js
+│   │  ├── storage.js
+│   │  └── notifications.js
+│
+│   ├── utils/
+│   │   ├── roles.js
+│   │   ├── rewards.js
+│   │   ├── constants.js
+│   │   └── helpers.js
+│
+│   └── styles/
+│       └── globals.css
+│
+├── package.json
+├── vite.config.js
+└── README.md

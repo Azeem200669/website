@@ -1,0 +1,771 @@
+/* ========================================= */
+/* REWARD PAGE - RESPONSIVE                  */
+/* ========================================= */
+
+/* ─── Page Layout ─────────────────────────── */
+.reward-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+.reward-main-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 4px;
+    color: #f4f4f5;
+}
+
+.reward-main-subtitle {
+    margin: 0 0 24px;
+    color: #71717a;
+    font-size: 14px;
+}
+
+/* ─── Stats Bar ───────────────────────────── */
+.reward-stats-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+}
+
+.r-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.r-stat-icon {
+    font-size: 28px;
+}
+
+.r-stat-val {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #e4e4e7;
+}
+
+.r-stat-label {
+    margin: 0;
+    font-size: 12px;
+    color: #71717a;
+    font-weight: 500;
+}
+
+.r-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 0 20px;
+    flex-shrink: 0;
+}
+
+/* ─── Sections ───────────────────────────── */
+.reward-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.reward-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.reward-section-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #e4e4e7;
+}
+
+.reward-day-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    background: rgba(124, 58, 237, 0.12);
+    color: #a78bfa;
+    border-radius: 20px;
+}
+
+/* ─── Daily Grid ─────────────────────────── */
+.daily-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.daily-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+/* States */
+.daily-box--active {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+    animation: dailyPulse 2s infinite;
+}
+
+.daily-box--claimed {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
+    opacity: 0.7;
+}
+
+.daily-box--locked {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.04);
+    opacity: 0.4;
+}
+
+@keyframes dailyPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(124, 58, 237, 0.3);
+    }
+}
+
+.daily-day {
+    font-size: 11px;
+    font-weight: 600;
+    color: #a1a1aa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.daily-pts {
+    font-size: 16px;
+    font-weight: 800;
+    color: #e4e4e7;
+}
+
+.daily-check {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 10px;
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.2);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.daily-lock {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 10px;
+}
+
+/* ─── Claim Button ────────────────────────── */
+.claim-daily-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.claim-daily-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+.claim-daily-btn:disabled {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ─── Converter Section ──────────────────── */
+.converter-rate {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #94a3b8;
+    background: rgba(245, 158, 11, 0.06);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.converter-rate strong {
+    color: #fbbf24;
+}
+
+.converter-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 24px;
+}
+
+.converter-input-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.converter-field {
+    flex: 1;
+}
+
+.converter-field label {
+    display: block;
+    font-size: 12px;
+    color: #71717a;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.converter-input-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0 12px;
+    transition: border-color 0.2s;
+}
+
+.converter-input-wrap:focus-within {
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+.converter-currency {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.converter-input-wrap input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f4f4f5;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 0;
+    width: 100%;
+    font-family: inherit;
+}
+
+.converter-input-wrap input::-webkit-inner-spin-button,
+.converter-input-wrap input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.converter-output {
+    background: rgba(245, 158, 11, 0.05) !important;
+    border-color: rgba(245, 158, 11, 0.15) !important;
+}
+
+.converter-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fbbf24;
+    padding: 12px 0;
+}
+
+.converter-arrow {
+    color: #52525b;
+    padding-bottom: 14px;
+}
+
+.converter-error {
+    color: #f87171;
+    font-size: 12px;
+    margin: -12px 0 16px;
+    font-weight: 500;
+}
+
+.convert-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.convert-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+}
+
+.convert-btn:disabled {
+    background: rgba(255, 255, 255, 0.06);
+    color: #52525b;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ─── Spinner ─────────────────────────────── */
+.mini-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ════════════════════════════════════════════ */
+/* RESPONSIVE BREAKPOINTS                     */
+/* ════════════════════════════════════════════ */
+
+/* ─── Tablet (768px - 1024px) ────────────── */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .reward-main-title {
+        font-size: 22px;
+    }
+
+    .reward-stats-bar {
+        padding: 14px 18px;
+    }
+
+    .r-stat-icon {
+        font-size: 24px;
+    }
+
+    .r-stat-val {
+        font-size: 18px;
+    }
+
+    .r-stat-divider {
+        margin: 0 14px;
+        height: 36px;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+
+    .daily-box {
+        padding: 14px 6px;
+    }
+
+    .daily-pts {
+        font-size: 14px;
+    }
+
+    .reward-section {
+        padding: 20px;
+    }
+
+    .converter-card {
+        padding: 20px;
+    }
+}
+
+/* ─── Small Tablet / Large Phone (≤768px) ─── */
+@media (max-width: 768px) {
+    .reward-main-title {
+        font-size: 20px;
+    }
+
+    .reward-main-subtitle {
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
+
+    .reward-stats-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        margin-bottom: 18px;
+    }
+
+    .r-stat-card {
+        width: 100%;
+    }
+
+    .r-stat-divider {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+
+    .reward-section {
+        padding: 18px;
+        margin-bottom: 16px;
+        border-radius: 14px;
+    }
+
+    .reward-section-header {
+        margin-bottom: 16px;
+    }
+
+    .reward-section-header h2 {
+        font-size: 16px;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .daily-box {
+        padding: 12px 6px;
+        border-radius: 10px;
+    }
+
+    .daily-day {
+        font-size: 10px;
+    }
+
+    .daily-pts {
+        font-size: 14px;
+    }
+
+    .daily-check,
+    .daily-lock {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+        top: 4px;
+        right: 4px;
+    }
+
+    .claim-daily-btn {
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .converter-rate {
+        font-size: 12px;
+        padding: 8px 12px;
+        margin-bottom: 16px;
+    }
+
+    .converter-card {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .converter-input-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin-bottom: 16px;
+    }
+
+    .converter-arrow {
+        transform: rotate(90deg);
+        align-self: center;
+        margin: -4px 0;
+        padding: 0;
+    }
+
+    .converter-field label {
+        margin-bottom: 6px;
+    }
+
+    .converter-currency {
+        font-size: 18px;
+    }
+
+    .converter-input-wrap input {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .converter-value {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .convert-btn {
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+}
+
+/* ─── Mobile (≤480px) ────────────────────── */
+@media (max-width: 480px) {
+    .reward-main-title {
+        font-size: 18px;
+    }
+
+    .reward-main-subtitle {
+        font-size: 12px;
+        margin-bottom: 14px;
+    }
+
+    .reward-stats-bar {
+        padding: 14px 12px;
+        gap: 10px;
+        margin-bottom: 14px;
+        border-radius: 12px;
+    }
+
+    .r-stat-icon {
+        font-size: 22px;
+    }
+
+    .r-stat-val {
+        font-size: 16px;
+    }
+
+    .r-stat-label {
+        font-size: 11px;
+    }
+
+    .reward-section {
+        padding: 14px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+    }
+
+    .reward-section-header {
+        margin-bottom: 14px;
+    }
+
+    .reward-section-header h2 {
+        font-size: 15px;
+    }
+
+    .reward-day-badge {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    .daily-box {
+        padding: 10px 4px;
+        border-radius: 8px;
+    }
+
+    .daily-day {
+        font-size: 9px;
+        letter-spacing: 0.3px;
+        margin-bottom: 2px;
+    }
+
+    .daily-pts {
+        font-size: 13px;
+    }
+
+    .daily-check,
+    .daily-lock {
+        width: 14px;
+        height: 14px;
+        font-size: 8px;
+        top: 3px;
+        right: 3px;
+    }
+
+    .claim-daily-btn {
+        padding: 11px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .converter-rate {
+        font-size: 11px;
+        padding: 8px 10px;
+        margin-bottom: 12px;
+        gap: 6px;
+    }
+
+    .converter-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .converter-currency {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    .converter-input-wrap input {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .converter-value {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .converter-error {
+        font-size: 11px;
+        margin: -8px 0 12px;
+    }
+
+    .convert-btn {
+        padding: 11px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+}
+
+/* ─── Very Small Mobile (≤360px) ─────────── */
+@media (max-width: 360px) {
+    .reward-main-title {
+        font-size: 16px;
+    }
+
+    .reward-stats-bar {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .r-stat-icon {
+        font-size: 20px;
+    }
+
+    .r-stat-val {
+        font-size: 14px;
+    }
+
+    .r-stat-label {
+        font-size: 10px;
+    }
+
+    .daily-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+
+    .daily-box {
+        padding: 8px 4px;
+    }
+
+    .daily-pts {
+        font-size: 12px;
+    }
+
+    .daily-day {
+        font-size: 8px;
+    }
+
+    .daily-check,
+    .daily-lock {
+        width: 12px;
+        height: 12px;
+        font-size: 7px;
+    }
+
+    .reward-section {
+        padding: 12px;
+    }
+
+    .reward-section-header h2 {
+        font-size: 14px;
+    }
+
+    .converter-rate {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    .converter-card {
+        padding: 12px;
+    }
+
+    .converter-field label {
+        font-size: 11px;
+    }
+
+    .converter-currency {
+        font-size: 14px;
+        margin-right: 6px;
+    }
+
+    .converter-input-wrap input {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+
+    .converter-value {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+}
+
+/* ─── Reduced Motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .daily-box--active {
+        animation: none;
+    }
+
+    .mini-spinner {
+        animation-duration: 0.01ms !important;
+    }
+
+    .claim-daily-btn:hover:not(:disabled) {
+        transform: none;
+    }
+
+    .convert-btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
